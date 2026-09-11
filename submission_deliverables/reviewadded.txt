@@ -1,9 +1,8 @@
 curl -b cookies.txt -X PUT "http://localhost:5000/customer/auth/review/1?review=Amazing+book" -H "Content-Type: application/json"
 
-The review for the book with ISBN 1 has been added/updated.
-
-curl http://localhost:5000/review/1
-
 {
+  "message": "The review for the book with ISBN 1 has been added/updated.",
+  "reviews": {
     "user1": "Amazing book"
+  }
 }
