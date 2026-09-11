@@ -8,7 +8,8 @@ const app = express();
 
 app.use(express.json());
 
-app.use("/customer", session({ secret: "fingerprint_customer", resave: true, saveUninitialized: true }));
+const sessionMiddleware = session({ secret: "fingerprint_customer", resave: true, saveUninitialized: true });
+app.use(sessionMiddleware);
 
 app.use("/customer/auth/*", function auth(req, res, next) {
     if (req.session && req.session.authorization) {
@@ -42,6 +43,7 @@ app.use("/customer/auth/*", function auth(req, res, next) {
 const PORT = 5000;
 
 app.use("/customer", customer_routes);
+app.use("/", customer_routes);
 app.use("/", genl_routes);
 
 app.listen(PORT, () => console.log("Server is running on port " + PORT));
